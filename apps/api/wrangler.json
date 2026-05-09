@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "compatibility_date": "2025-10-08",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "enable_request_signal",
+    "request_signal_passthrough",
+    "no_handle_cross_request_promise_resolution"
+  ],
+  "main": "src/main.ts",
+  "name": "usage-quest-api",
+  "upload_source_maps": true,
+  "observability": {
+    "enabled": true
+  },
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "fd84fc19b6be46c0a1c8ce463299aae1"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "usage-quest-prod",
+      "database_id": "03a17202-a6f3-45ad-ad97-2510f95285ef",
+      "migrations_dir": "src/infra/db/migrations"
+    }
+  ]
+}

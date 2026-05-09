@@ -1,0 +1,5 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+	"root": false,
+	"extends": ["@usage-quest/biome-config/base", "@usage-quest/biome-config/cf-worker"]
+}
