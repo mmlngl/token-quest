@@ -2,26 +2,14 @@
 	"name": "api",
 	"description": "API app",
 	"dependencies": {
-		"@better-auth/api-key": "^1.6.9",
-		"@better-auth/drizzle-adapter": "^1.6.9",
 		"@effect/platform": "^0.96.1",
-		"@effect/platform-node": "^0.106.0",
-		"@mmlngl/effect-messagekit-core": "^0.0.1",
-		"@mmlngl/effect-messagekit-provider-line": "^0.0.1",
-		"@usage-quest/common": "workspace:^",
-		"@usage-quest/core": "workspace:^",
-		"better-auth": "^1.6.5",
-		"better-auth-cloudflare": "^0.3.0",
-		"drizzle-orm": "^0.45.2",
 		"effect": "^3.21.1",
-		"jose": "^6.2.2",
 		"wrangler": "^4.61.1"
 	},
 	"devDependencies": {
-		"@usage-quest/biome-config": "workspace:^",
-		"@usage-quest/typescript-config": "workspace:^",
+		"@token-quest/biome-config": "workspace:^",
+		"@token-quest/typescript-config": "workspace:^",
 		"@types/node": "^25.6.0",
-		"drizzle-kit": "^0.31.10",
 		"typescript": "5.9.3"
 	},
 	"private": true,
@@ -30,9 +18,6 @@
 		"lint": "biome check --write .",
 		"check": "tsc && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
-		"db:generate:auth": "pnpm dlx auth@latest generate --config=./src/infra/auth/auth-sync.ts --output=./src/infra/db/schema/auth.ts --yes",
-		"db:generate": "pnpm run db:generate:auth && pnpm drizzle-kit generate",
-		"db:migrate": "wrangler d1 migrations apply DB"
+		"dev": "wrangler dev"
 	}
 }

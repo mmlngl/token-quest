@@ -3,27 +3,11 @@
 // Runtime types generated with workerd@1.20260415.1 2025-10-08 enable_request_signal,no_handle_cross_request_promise_resolution,nodejs_compat,request_signal_passthrough
 declare namespace Cloudflare {
 	interface GlobalProps {
-		mainModule: typeof import("./src/index");
+		mainModule: typeof import("./src/main");
 	}
-	interface Env {
-		KV: KVNamespace;
-		DB: D1Database;
-		GOOGLE_GENERATIVE_AI_API_KEY: string;
-		JWKS_ENDPOINT: string;
-		BETTER_AUTH_URL: string;
-		DATABASE_URL: string;
-		BETTER_AUTH_SECRET: string;
-		BETTER_AUTH_BASE_URL: string;
-		TRUSTED_ORIGINS: string;
-	}
+	interface Env {}
 }
 interface Env extends Cloudflare.Env {}
-type StringifyValues<EnvType extends Record<string, unknown>> = {
-	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
-};
-declare namespace NodeJS {
-	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "GOOGLE_GENERATIVE_AI_API_KEY" | "JWKS_ENDPOINT" | "BETTER_AUTH_URL" | "DATABASE_URL" | "BETTER_AUTH_SECRET" | "BETTER_AUTH_BASE_URL" | "TRUSTED_ORIGINS">> {}
-}
 
 // Begin runtime types
 /*! *****************************************************************************
