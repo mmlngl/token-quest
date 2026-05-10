@@ -1,17 +1,10 @@
-import * as P from "@effect/platform";
 import * as Fn from "effect/Function";
 import * as Layer from "effect/Layer";
+import * as Http from "effect/unstable/http";
+import * as P from "effect/unstable/httpapi";
 import * as Api from "./Api";
 import * as Health from "./Health/Http";
-import * as HTTP from "./Http";
 import * as Infra from "./infra";
-
-const ModulesLayer = Layer.mergeAll(Health.HttpHealthLive);
-
-export const ApiLive = Layer.provide(
-	P.HttpApiBuilder.api(Api.Api),
-	ModulesLayer,
-);
 
 export const makeHandler = (env: Env, ctx: ExecutionContext) => {
 	const InfraLayer = Layer.mergeAll(
@@ -19,13 +12,15 @@ export const makeHandler = (env: Env, ctx: ExecutionContext) => {
 		Infra.ExecutionCtx.ExecutionCtx.layerFromCtx(ctx),
 	);
 
-	return P.HttpApiBuilder.toWebHandler(
+	const appLayer = Layer.provide(
+		P.HttpApiBuilder.layer(Api.Api),
 		Layer.mergeAll(
-			P.HttpServer.layerContext,
-			HTTP.ApiLive.pipe(Layer.provide(InfraLayer)),
+			Http.HttpServer.layerServices,
+			Health.HttpHealthLive.pipe(Layer.provide(InfraLayer)),
 		),
-		{
-			middleware: Fn.flow(P.HttpMiddleware.logger, P.HttpMiddleware.cors()),
-		},
 	);
+
+	return Http.HttpRouter.toWebHandler(appLayer, {
+		middleware: Fn.flow(Http.HttpMiddleware.logger, Http.HttpMiddleware.cors()),
+	});
 };

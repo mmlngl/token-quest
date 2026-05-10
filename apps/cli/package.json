@@ -1,0 +1,16 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "exec": "tsx src/main.ts"
+  },
+  "keywords": [],
+  "author": "Michele Memoli <michele.memoli@gmail.com>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.15.0",
+  "dependencies": {
+    "@effect/platform-node": "4.0.0-beta.65",
+    "effect": "4.0.0-beta.65"
+  }
+}

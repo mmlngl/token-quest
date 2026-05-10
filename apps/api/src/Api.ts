@@ -1,4 +1,4 @@
-import * as P from "@effect/platform";
+import * as P from "effect/unstable/httpapi";
 import * as Health from "./Health/Api";
 
 export class Api extends P.HttpApi.make("api")

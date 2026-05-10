@@ -12,5 +12,11 @@
   "upload_source_maps": true,
   "observability": {
     "enabled": true
-  }
+  },
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS",
+      "dataset": "session-stats"
+    }
+  ]
 }

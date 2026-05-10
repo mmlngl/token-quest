@@ -1,9 +1,13 @@
 {
 	"name": "api",
 	"description": "API app",
+	"author": "Michele Memoli <michele.memoli@gmail.com>",
+	"license": "MIT",
 	"dependencies": {
-		"@effect/platform": "^0.96.1",
-		"effect": "^3.21.1",
+		"@effect/platform-node": "4.0.0-beta.65",
+		"@effect/vitest": "4.0.0-beta.65",
+		"@token-quest/core": "workspace:^",
+		"effect": "4.0.0-beta.65",
 		"wrangler": "^4.61.1"
 	},
 	"devDependencies": {
