@@ -19,8 +19,8 @@ export class SessionStats extends Schema.Class<SessionStats>("SessionStats")(
     provider: LLMs.Provider,
     model: LLMs.Model,
     tokenUsage: LLMs.TokenUsage,
-    startedAt: Schema.Date,
-    endedAt: Schema.Date,
+    startedAt: Schema.DateFromString,
+    endedAt: Schema.DateFromString,
   },
   {
     title: "Session Stats",
