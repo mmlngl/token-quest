@@ -9,10 +9,13 @@ export class SessionStatsReportError extends Schema.TaggedErrorClass<SessionStat
     id: SessionStats.SessionStatsId,
     cause: Schema.Unknown,
   },
+  {
+    httpApiStatus: 500,
+  },
 ) {}
 
 export interface SessionStatsReporterTrait {
-  report: (
+  readonly report: (
     stats: SessionStats.SessionStats,
   ) => Effect.Effect<void, SessionStatsReportError>;
 }

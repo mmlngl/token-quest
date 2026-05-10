@@ -1,10 +1,10 @@
-# Usage Quest
+# Token Quest
 
-Usage Quest is a game layer for AI usage.
+Token Quest is a game layer for AI usage.
 
-People already spend time, money, and attention inside AI tools every day. They prompt, refine, retry, compare models, chase better outputs, and slowly develop habits around token consumption. Today that activity is mostly invisible. Usage Quest turns it into something social, legible, and fun.
+People already spend time, money, and attention inside AI tools every day. They prompt, refine, retry, compare models, chase better outputs, and slowly develop habits around token consumption. Today that activity is mostly invisible. Token Quest turns it into something social, legible, and fun.
 
-At its core, Usage Quest lets people report their AI usage after each session, aggregates that activity across time, and transforms it into leaderboards, badges, milestones, streaks, and personal stats.
+At its core, Token Quest lets people report their AI usage after each session, aggregates that activity across time, and transforms it into leaderboards, badges, milestones, streaks, and personal stats.
 
 This README focuses on the proposition: what this product is, why it matters, who it is for, what makes it fun, and what shape the MVP should take.
 
@@ -12,16 +12,16 @@ This README focuses on the proposition: what this product is, why it matters, wh
 
 ## One-line proposition
 
-**Usage Quest makes AI usage visible and playful by turning token consumption into a social game.**
+**Token Quest makes AI usage visible and playful by turning token consumption into a social game.**
 
 ---
 
 ## Short pitch
 
-People use AI all day, but their usage patterns are fragmented across products, invisible to friends, and emotionally flat. Usage Quest creates a shared meta-game on top of AI tools:
+People use AI all day, but their usage patterns are fragmented across products, invisible to friends, and emotionally flat. Token Quest creates a shared meta-game on top of AI tools:
 
 - use AI in your normal workflow
-- report session usage to Usage Quest
+- report session usage to Token Quest
 - earn badges and streaks
 - climb daily, monthly, and yearly leaderboards
 - compare your habits with friends, teams, or the whole world
@@ -38,7 +38,7 @@ The product starts from one simple behavior:
 
 > After an AI session ends, token usage gets reported to a central service.
 
-From that one event, Usage Quest can build:
+From that one event, Token Quest can build:
 
 - personal usage history
 - public leaderboards
@@ -80,7 +80,7 @@ Most AI products show usage only as:
 
 That framing is functional, not emotional.
 
-Usage Quest reframes usage from cost/accounting into **progress/status/play**.
+Token Quest reframes usage from cost/accounting into **progress/status/play**.
 
 ---
 
@@ -99,7 +99,7 @@ Fitness apps did this for steps.
 GitHub did this for commits.
 Letterboxd did this for films.
 Strava did this for exercise.
-Usage Quest can do this for AI usage.
+Token Quest can do this for AI usage.
 
 The user is already generating the underlying behavior. The product only needs to capture, score, and present it in a way that feels alive.
 
@@ -110,7 +110,7 @@ The user is already generating the underlying behavior. The product only needs t
 ### 1. Existing behavior, no new habit required
 
 Users do not need to learn a brand-new activity. They already use AI.
-Usage Quest rides an existing habit instead of inventing one.
+Token Quest rides an existing habit instead of inventing one.
 
 ### 2. Frequent loops
 
@@ -152,13 +152,13 @@ People already talk about:
 - whether they are “power users”
 - what tools fit their workflow
 
-Usage Quest gives that identity a home.
+Token Quest gives that identity a home.
 
 ---
 
 ## Product vision
 
-Usage Quest becomes the default scoreboard for AI usage across tools.
+Token Quest becomes the default scoreboard for AI usage across tools.
 
 A user should be able to say:
 
@@ -414,7 +414,7 @@ A challenge surface lets users pursue goals other than total spend.
 
 ## Data proposition
 
-Usage Quest should focus on lightweight, privacy-aware telemetry.
+Token Quest should focus on lightweight, privacy-aware telemetry.
 
 At minimum, the product needs:
 
@@ -483,7 +483,7 @@ This lets the product ship quickly while preserving a path to stronger credibili
 
 ## Why integrations matter
 
-Usage Quest is strongest as a layer across tools, not as a standalone destination.
+Token Quest is strongest as a layer across tools, not as a standalone destination.
 
 If AI usage must be manually entered, the game dies.
 If reporting is automatic, the game becomes ambient.
@@ -500,7 +500,7 @@ That means integrations are central to the proposition.
 
 ### Strategic advantage
 
-If Usage Quest becomes easy to integrate with, it can become the default shared telemetry/game layer for AI-native tooling.
+If Token Quest becomes easy to integrate with, it can become the default shared telemetry/game layer for AI-native tooling.
 
 That is more defensible than a single-purpose app.
 
@@ -510,7 +510,7 @@ That is more defensible than a single-purpose app.
 
 A CLI is not only an implementation choice. It supports the proposition directly.
 
-It gives Usage Quest:
+It gives Token Quest:
 
 - one standard reporting path
 - easier integration with extensions and harnesses
@@ -525,7 +525,7 @@ The CLI helps meet them where they already work.
 
 ## Positioning
 
-Usage Quest sits between several categories, but is not identical to any of them.
+Token Quest sits between several categories, but is not identical to any of them.
 
 ### It is not:
 
@@ -784,7 +784,7 @@ Long term, a user’s AI activity profile could become part of how they describe
 
 ## Summary
 
-Usage Quest is a playful identity and competition layer for AI usage.
+Token Quest is a playful identity and competition layer for AI usage.
 
 It starts with a simple mechanic:
 
@@ -804,4 +804,4 @@ The MVP should stay narrow:
 - lightweight identity
 - no unnecessary data collection
 
-If done well, Usage Quest can make AI usage feel less like billing and more like play.
+If done well, Token Quest can make AI usage feel less like billing and more like play.
