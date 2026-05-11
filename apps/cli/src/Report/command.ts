@@ -1,32 +1,24 @@
 import * as Core from "@token-quest/core/domain";
+import * as Console from "effect/Console";
 import * as Effect from "effect/Effect";
-import { Argument, Command, Flag } from "effect/unstable/cli";
+import { Command, Flag } from "effect/unstable/cli";
 import * as Infra from "../infra";
 
-const _name = Argument.string("name").pipe(Argument.withDefault("World"));
-const _shout = Flag.boolean("shout").pipe(Flag.withAlias("s"));
+const stats = Flag.string("stats").pipe(
+  Flag.withDescription(
+    'SessionStats as a JSON string, e.g. \'{ "id": "...", "userId": "...", ... }\'',
+  ),
+);
 
-export const command = Command.make("report", {}, () =>
+export const command = Command.make("report", { stats }, ({ stats }) =>
   Effect.gen(function* () {
     const client = yield* Infra.Client.make;
 
-    const stats = yield* Core.SessionStats.SessionStats.decodeSingle({
-      id: "sess_01JWXK2M4P8N3Q7F",
-      userId: "user_01JWXK1A9B2C3D4E",
-      provider: "anthropic",
-      model: "claude-sonnet-4",
-      tokenUsage: {
-        promptTokens: 1240,
-        completionTokens: 387,
-      },
-      startedAt: "2026-05-10T09:15:00.000Z",
-      endedAt: "2026-05-10T09:17:23.000Z",
-    });
+    const sessionStats =
+      yield* Core.SessionStats.SessionStats.decodeJsonSingle(stats);
 
-    const _op = yield* client["session-stats"].report({
-      payload: {
-        stats,
-      },
-    });
+    yield* client["session-stats"].report({ payload: { stats: sessionStats } });
+
+    yield* Console.log("Session reported.");
   }),
 );

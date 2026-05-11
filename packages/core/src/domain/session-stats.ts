@@ -27,6 +27,9 @@ export class SessionStats extends Schema.Class<SessionStats>("SessionStats")(
   },
 ) {
   static decodeSingle = Schema.decodeUnknownEffect(SessionStats);
+  static decodeJsonSingle = Schema.decodeUnknownEffect(
+    Schema.fromJsonString(SessionStats),
+  );
 }
 
 export declare namespace SessionStats {
