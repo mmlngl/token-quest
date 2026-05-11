@@ -1,7 +1,7 @@
+import * as Api from "@token-quest/api";
 import * as Core from "@token-quest/core/domain";
 import * as Effect from "effect/Effect";
 import * as P from "effect/unstable/httpapi";
-import * as Api from "../Api";
 import * as Contract from "./Contract";
 
 export const HttpSessionStatsLive = P.HttpApiBuilder.group(

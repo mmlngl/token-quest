@@ -25,7 +25,9 @@ export class SessionStats extends Schema.Class<SessionStats>("SessionStats")(
   {
     title: "Session Stats",
   },
-) {}
+) {
+  static decodeSingle = Schema.decodeUnknownEffect(SessionStats);
+}
 
 export declare namespace SessionStats {
   export type Type = typeof SessionStats.Type;

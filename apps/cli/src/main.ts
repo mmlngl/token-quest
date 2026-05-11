@@ -1,19 +1,26 @@
 import * as N from "@effect/platform-node";
-import * as Console from "effect/Console";
 import * as Effect from "effect/Effect";
-import { Argument, Command, Flag } from "effect/unstable/cli";
+import * as Layer from "effect/Layer";
+import { Command } from "effect/unstable/cli";
 import pkg from "../package.json" with { type: "json" };
+import * as Report from "./Report";
 
-const name = Argument.string("name").pipe(Argument.withDefault("World"));
-const shout = Flag.boolean("shout").pipe(Flag.withAlias("s"));
+const tokenQuest = Command.make(
+  "TokenQuest",
+  {},
+  Effect.fn(function* () {}),
+);
 
-const greet = Command.make("greet", { name, shout }, ({ name, shout }) => {
-  const message = `Hello, ${name}!`;
-  return Console.log(shout ? message.toUpperCase() : message);
-});
+const InfraLayer = Layer.mergeAll(N.NodeHttpClient.layerUndici);
 
-const program = Command.run(greet, {
+const CombinedCommands = tokenQuest.pipe(
+  Command.withSubcommands([Report.command]),
+);
+
+const program = Command.run(CombinedCommands, {
   version: pkg.version,
 });
 
-program.pipe(Effect.provide(N.NodeServices.layer), N.NodeRuntime.runMain);
+const runnable = program.pipe(Effect.provide(InfraLayer));
+
+runnable.pipe(Effect.provide(N.NodeServices.layer), N.NodeRuntime.runMain);

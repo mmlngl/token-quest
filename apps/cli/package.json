@@ -10,6 +10,8 @@
   "license": "MIT",
   "packageManager": "pnpm@10.15.0",
   "dependencies": {
+    "@token-quest/api": "workspace:^",
+    "@token-quest/core": "workspace:^",
     "@effect/platform-node": "4.0.0-beta.65",
     "effect": "4.0.0-beta.65"
   }

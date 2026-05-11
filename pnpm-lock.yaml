@@ -41,6 +41,9 @@ importers:
       '@effect/vitest':
         specifier: 4.0.0-beta.65
         version: 4.0.0-beta.65(effect@4.0.0-beta.65)(vitest@4.1.5)
+      '@token-quest/api':
+        specifier: workspace:^
+        version: link:../../packages/api
       '@token-quest/core':
         specifier: workspace:^
         version: link:../../packages/core
@@ -69,9 +72,34 @@ importers:
       '@effect/platform-node':
         specifier: 4.0.0-beta.65
         version: 4.0.0-beta.65(effect@4.0.0-beta.65)(ioredis@5.10.1)
+      '@token-quest/api':
+        specifier: workspace:^
+        version: link:../../packages/api
+      '@token-quest/core':
+        specifier: workspace:^
+        version: link:../../packages/core
       effect:
         specifier: 4.0.0-beta.65
         version: 4.0.0-beta.65
+
+  packages/api:
+    dependencies:
+      '@token-quest/core':
+        specifier: workspace:^
+        version: link:../core
+    devDependencies:
+      '@effect/platform-node':
+        specifier: 4.0.0-beta.65
+        version: 4.0.0-beta.65(effect@4.0.0-beta.65)(ioredis@5.10.1)
+      '@effect/vitest':
+        specifier: 4.0.0-beta.65
+        version: 4.0.0-beta.65(effect@4.0.0-beta.65)(vitest@4.1.5)
+      effect:
+        specifier: 4.0.0-beta.65
+        version: 4.0.0-beta.65
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@25.6.0)(@vitest/coverage-v8@4.1.5)(happy-dom@20.9.0)(jsdom@28.0.0(@noble/hashes@2.2.0))(vite@7.3.2(@types/node@25.6.0)(sass@1.77.4)(terser@5.16.9)(tsx@4.21.0)(yaml@2.8.4))
 
   packages/biome-config: {}
 

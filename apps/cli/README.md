@@ -3,5 +3,5 @@
 Run with
 
 ```bash
-tsx src/main.ts John -s
+pnpm run exec report
 ```

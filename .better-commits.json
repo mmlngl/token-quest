@@ -72,6 +72,10 @@
         "label": "app-web"
       },
       {
+        "value": "package-api",
+        "label": "package-api"
+      },
+      {
         "value": "package-core",
         "label": "package-core"
       },
