@@ -1,6 +1,8 @@
 import * as Core from "@token-quest/core/domain";
+import * as Config from "effect/Config";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
+import * as Match from "effect/Match";
 import * as WorkerEnv from "./worker-env";
 
 const toAnalyticsDataPoint = (
@@ -11,7 +13,7 @@ const toAnalyticsDataPoint = (
 	const totalTokens = promptTokens + completionTokens;
 
 	return {
-		indexes: [stats.userId, stats.provider, stats.model],
+		indexes: [stats.userId],
 		doubles: [
 			promptTokens,
 			completionTokens,
@@ -21,6 +23,8 @@ const toAnalyticsDataPoint = (
 		],
 		blobs: [
 			stats.id,
+			stats.provider,
+			stats.model,
 			stats.startedAt.toISOString(),
 			stats.endedAt.toISOString(),
 		],
@@ -28,18 +32,32 @@ const toAnalyticsDataPoint = (
 };
 
 export const make = Effect.gen(function* () {
-	const env = yield* WorkerEnv.WorkerEnv;
+	const bindings = yield* WorkerEnv.WorkerEnv;
+
+	const ANALYTICS = yield* Config.literals(["dev", "prod"]).pipe(
+		Config.withDefault("dev"),
+		Config.map((env) =>
+			Match.value(env).pipe(
+				Match.when("dev", () => bindings.ANALYTICS_DEV),
+				Match.when("prod", () => bindings.ANALYTICS_PROD),
+				Match.exhaustive,
+			),
+		),
+	);
 
 	const report: Core.SessionStatsReporter.SessionStatsReporterTrait["report"] =
 		Effect.fn("session-stats-reporter.report")(function* (stats) {
+			const dataPoint = toAnalyticsDataPoint(stats);
 			yield* Effect.try({
-				try: () => env.ANALYTICS.writeDataPoint(toAnalyticsDataPoint(stats)),
+				try: () => ANALYTICS.writeDataPoint(dataPoint),
 				catch: (cause) =>
 					new Core.SessionStatsReporter.SessionStatsReportError({
 						id: stats.id,
-						cause,
+						cause: cause instanceof Error ? cause.message : String(cause),
 					}),
-			});
+			}).pipe(Effect.tapError((error) => Effect.logError(error)));
+
+			yield* Effect.logInfo("Session Stats Reported");
 		});
 
 	return Core.SessionStatsReporter.SessionStatsReporter.of({ report });

@@ -7,7 +7,7 @@ body:
   content: |-
     {
         "stats": {
-          "id": "sess_01JWXK2M4P8N3Q7R",
+          "id": "sess_01JWXK2M4P8N3Q7F",
           "userId": "user_01JWXK1A9B2C3D4E",
           "provider": "anthropic",
           "model": "claude-sonnet-4",

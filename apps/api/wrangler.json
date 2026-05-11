@@ -10,13 +10,20 @@
   "main": "src/main.ts",
   "name": "token-quest-api",
   "upload_source_maps": true,
+  "vars": {
+    "ANALYTICS_GRAPHQL_ENDPOINT": "https://api.cloudflare.com/client/v4/graphql"
+  },
   "observability": {
     "enabled": true
   },
   "analytics_engine_datasets": [
     {
-      "binding": "ANALYTICS",
-      "dataset": "session-stats"
+      "binding": "ANALYTICS_PROD",
+      "dataset": "token_quest_session_stats_prod"
+    },
+    {
+      "binding": "ANALYTICS_DEV",
+      "dataset": "token_quest_session_stats_dev"
     }
   ]
 }

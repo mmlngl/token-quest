@@ -1,0 +1,11 @@
+$kind: http-request
+name: query
+url: "{{baseUrl}}/session-stats/sql"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "query": "SELECT blob1 AS session_id, index1 AS user_id, blob2 AS provider, blob3 AS model, double1 AS prompt_tokens, double2 AS completion_tokens, double3 AS total_tokens, blob4 AS started_at, blob5 AS ended_at FROM {{analyticsDataSet}} WHERE timestamp > NOW() - INTERVAL '1' DAY"
+    }
+order: 2631433349865645

@@ -8,7 +8,7 @@
 		"@effect/vitest": "4.0.0-beta.65",
 		"@token-quest/core": "workspace:^",
 		"effect": "4.0.0-beta.65",
-		"wrangler": "^4.61.1"
+		"wrangler": "^4.90.0"
 	},
 	"devDependencies": {
 		"@token-quest/biome-config": "workspace:^",

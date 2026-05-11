@@ -1,4 +1,7 @@
 name: local
 values:
   - key: baseUrl
-    value: ''
+    value: 'http://localhost:8787/api/v1'
+  - key: analyticsDataSet
+    value: token_quest_session_stats_dev
+color: 120

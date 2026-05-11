@@ -8,17 +8,37 @@ export const HttpSessionStatsLive = P.HttpApiBuilder.group(
 	Api.Api,
 	"session-stats",
 	(handlers) =>
-		handlers.handle("report", ({ payload }) =>
-			Effect.gen(function* () {
-				const reporter = yield* Core.SessionStatsReporter.SessionStatsReporter;
+		handlers
+			.handle(
+				"report",
+				Effect.fnUntraced(function* ({ payload }) {
+					const reporter =
+						yield* Core.SessionStatsReporter.SessionStatsReporter;
 
-				yield* reporter.report(payload.stats);
+					yield* reporter
+						.report(payload.stats)
+						.pipe(Effect.tapError((error) => Effect.logError(error)));
 
-				const result = Contract.ReportSuccessSchema.make({
-					isSuccess: true,
-				});
+					const result = Contract.ReportSuccessSchema.make({
+						isSuccess: true,
+					});
 
-				return result;
-			}),
-		),
+					return result;
+				}),
+			)
+			.handle(
+				"sql",
+				Effect.fnUntraced(function* ({ payload }) {
+					const datastore =
+						yield* Core.SessionStatsQueryEngine.SessionStatsQueryEngine;
+
+					const data = yield* datastore.sql(payload.query);
+
+					const result = Contract.QuerySqlSuccessSchema.make({
+						response: data,
+					});
+
+					return result;
+				}),
+			),
 );

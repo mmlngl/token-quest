@@ -11,11 +11,13 @@ export const makeHandler = (env: Env, ctx: ExecutionContext) => {
 	const CfLayer = Layer.mergeAll(
 		Infra.WorkerEnv.WorkerEnv.layerFromEnv(env),
 		Infra.ExecutionCtx.ExecutionCtx.layerFromCtx(ctx),
+		Http.FetchHttpClient.layer,
 	);
 
-	const InfraLayer = Layer.mergeAll(Infra.SessionStatsReport.layer).pipe(
-		Layer.provide(CfLayer),
-	);
+	const InfraLayer = Layer.mergeAll(
+		Infra.SessionStatsReport.layer,
+		Infra.SessionStatsQueryEngine.layer,
+	).pipe(Layer.provide(CfLayer));
 
 	const ApiLayer = Layer.mergeAll(
 		Health.HttpHealthLive.pipe(Layer.provide(InfraLayer)),
