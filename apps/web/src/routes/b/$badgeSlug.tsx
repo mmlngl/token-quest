@@ -6,6 +6,7 @@ import * as Option from "effect/Option";
 import type * as BadgeEntity from "~entities/badge";
 import { BadgeWidget } from "~lib/widgets/badge";
 import * as Runtime from "~services/runtime";
+import * as UnderConstruction from "~widgets/under-constructions";
 
 export interface BadgeLoaderData {
 	badge: BadgeEntity.BadgeModel;
@@ -37,5 +38,10 @@ export const Route = createFileRoute("/b/$badgeSlug")({
 
 function BadgeDetail() {
 	const { badge } = Route.useLoaderData();
-	return <BadgeWidget badge={badge} />;
+	return (
+		<div className="min-h-screen bg-background text-foreground flex flex-col">
+			<UnderConstruction.UnderConstruction />
+			<BadgeWidget badge={badge} />
+		</div>
+	);
 }

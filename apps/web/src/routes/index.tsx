@@ -1,18 +1,56 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+	navigationMenuTriggerStyle,
+} from "@token-quest/ui/components/navigation-menu";
+import * as UnderConstruction from "~widgets/under-constructions";
 
 export const Route = createFileRoute("/")({ component: PublicHome });
 
 function PublicHome() {
 	return (
 		<div className="min-h-screen bg-background text-foreground flex flex-col">
+			<UnderConstruction.UnderConstruction />
 			{/* Header strip */}
 			<header className="bg-foreground text-background flex items-center justify-between px-8 py-4 border-b border-foreground">
 				<span className="font-black text-sm tracking-widest uppercase">
 					Play Token Quest · Free
 				</span>
-				<span className="font-mono text-xs tracking-widest uppercase">
-					AI Usage · Ranked
-				</span>
+				<div className="flex items-center gap-8">
+					<NavigationMenu>
+						<NavigationMenuList>
+							<NavigationMenuItem>
+								<NavigationMenuTrigger>Leaderboards</NavigationMenuTrigger>
+								<NavigationMenuContent>
+									<NavigationMenuLink
+										asChild
+										className={navigationMenuTriggerStyle()}
+									>
+										<Link to="/leaderboards/daily">Daily</Link>
+									</NavigationMenuLink>
+									<NavigationMenuLink
+										asChild
+										className={navigationMenuTriggerStyle()}
+									>
+										<Link to="/leaderboards/weekly">Weekly</Link>
+									</NavigationMenuLink>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
+						</NavigationMenuList>
+					</NavigationMenu>
+					<Link
+						to="/guide"
+						className="font-mono text-xs tracking-widest uppercase opacity-60 hover:opacity-100"
+					>
+						How to Play
+					</Link>
+					<span className="font-mono text-xs opacity-40">Sun 10 May 2026</span>
+				</div>
 			</header>
 
 			{/* Main grid */}

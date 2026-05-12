@@ -7,6 +7,7 @@ import {
 } from "@token-quest/ui/components/chart";
 import { Line, LineChart, XAxis, YAxis } from "recharts";
 import * as Masthead from "~widgets/masthead";
+import * as UnderConstruction from "~widgets/under-constructions";
 
 export const Route = createFileRoute("/leaderboards/weekly")({
 	component: WeeklyLeaderboard,
@@ -110,6 +111,7 @@ const deltaColor = (d: string) =>
 function WeeklyLeaderboard() {
 	return (
 		<div className="min-h-screen bg-background text-foreground flex flex-col">
+			<UnderConstruction.UnderConstruction />
 			{/* Header */}
 			<Masthead.Masthead pageTitle="Weekly Leaderboard" />
 

@@ -7,6 +7,7 @@ import {
 } from "@token-quest/ui/components/chart";
 import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 import * as Masthead from "~widgets/masthead";
+import * as UnderConstruction from "~widgets/under-constructions";
 
 export const Route = createFileRoute("/leaderboards/daily")({
 	component: DailyLeaderboard,
@@ -59,6 +60,7 @@ const fmt = (n: number) => n.toLocaleString();
 function DailyLeaderboard() {
 	return (
 		<div className="min-h-screen bg-background text-foreground flex flex-col">
+			<UnderConstruction.UnderConstruction />
 			{/* Header */}
 			<Masthead.Masthead pageTitle="Daily Leaderboard" />
 
