@@ -15,7 +15,13 @@
     "ANALYTICS_GRAPHQL_ENDPOINT": "https://api.cloudflare.com/client/v4/graphql"
   },
   "observability": {
-    "enabled": true
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": true
+    }
   },
   "analytics_engine_datasets": [
     {
