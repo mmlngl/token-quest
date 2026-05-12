@@ -56,6 +56,12 @@ export const Masthead: FC<MastheadProps> = ({ pageTitle }) => {
 				>
 					How to Play
 				</Link>
+				<Link
+					to="/develop"
+					className="font-mono text-xs tracking-widest uppercase opacity-60 hover:opacity-100"
+				>
+					Develop
+				</Link>
 				<span className="font-mono text-xs opacity-40">Sun 10 May 2026</span>
 			</div>
 		</header>

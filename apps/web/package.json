@@ -12,7 +12,8 @@
 		"test": "vitest run",
 		"format": "biome format",
 		"lint": "biome check --write .",
-		"deploy": "pnpm run build && wrangler deploy"
+		"deploy": "pnpm run build && wrangler deploy",
+		"cf-typegen": "wrangler types -c wrangler.jsonc -c ../api/wrangler.json"
 	},
 	"dependencies": {
 		"@clerk/clerk-react": "^5.61.3",

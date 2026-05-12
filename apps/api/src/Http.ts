@@ -1,6 +1,7 @@
 import * as Api from "@token-quest/api";
 import * as Fn from "effect/Function";
 import * as Layer from "effect/Layer";
+import * as ManagedRuntime from "effect/ManagedRuntime";
 import * as Http from "effect/unstable/http";
 import * as P from "effect/unstable/httpapi";
 import * as Health from "./Health/Http";
@@ -29,7 +30,13 @@ export const makeHandler = (env: Env, ctx: ExecutionContext) => {
 		Layer.mergeAll(Http.HttpServer.layerServices, ApiLayer),
 	);
 
-	return Http.HttpRouter.toWebHandler(FinalLayer, {
-		middleware: Fn.flow(Http.HttpMiddleware.logger, Http.HttpMiddleware.cors()),
-	});
+	return {
+		handler: Http.HttpRouter.toWebHandler(FinalLayer, {
+			middleware: Fn.flow(
+				Http.HttpMiddleware.logger,
+				Http.HttpMiddleware.cors(),
+			),
+		}),
+		runtime: ManagedRuntime.make(InfraLayer),
+	};
 };

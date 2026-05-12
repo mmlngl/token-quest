@@ -1,16 +1,44 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { setResponseHeaders } from "@tanstack/react-start/server";
 import {
 	type ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@token-quest/ui/components/chart";
+import * as Cause from "effect/Cause";
+import * as Effect from "effect/Effect";
+import * as Exit from "effect/Exit";
 import { Line, LineChart, XAxis, YAxis } from "recharts";
+import * as Runtime from "~services/runtime";
 import * as Masthead from "~widgets/masthead";
 import * as UnderConstruction from "~widgets/under-constructions";
 
+export const getData = createServerFn().handler(async () => {
+	setResponseHeaders(
+		new Headers({
+			"Cache-Control": "public, max-age=300",
+			"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
+		}),
+	);
+
+	const program = Effect.gen(function* () {
+		return yield* Effect.void;
+	});
+
+	const exit = await Runtime.Runtime.runtime.runPromiseExit(program);
+	return Exit.match(exit, {
+		onSuccess: () => void 0,
+		onFailure: (cause) => {
+			throw new Error(`Failed to requester\n${Cause.pretty(cause)}`);
+		},
+	});
+});
+
 export const Route = createFileRoute("/leaderboards/weekly")({
 	component: WeeklyLeaderboard,
+	loader: () => getData(),
 	staleTime: 30_000,
 });
 

@@ -1,7 +1,54 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { setResponseHeaders } from "@tanstack/react-start/server";
+import * as Cause from "effect/Cause";
+import * as Effect from "effect/Effect";
+import * as Exit from "effect/Exit";
+import * as Runtime from "~services/runtime";
+import * as UnderConstruction from "~widgets/under-constructions";
+
+export const getData = createServerFn({
+	strict: false,
+}).handler(async () => {
+	setResponseHeaders(
+		new Headers({
+			"Cache-Control": "public, max-age=300",
+			"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
+		}),
+	);
+	const program = Effect.gen(function* () {
+		const Api = yield* Runtime.Api.Api;
+		const result = yield* Api.use((api) =>
+			api.sql(
+				`SELECT blob1 AS session_id,
+                index1 AS user_id,
+                blob2 AS provider,
+                blob3 AS model,
+                double1 AS prompt_tokens,
+                double2 AS completion_tokens,
+                double3 AS total_tokens,
+                blob4 AS started_at,
+                blob5 AS ended_at
+          FROM token_quest_session_stats_dev
+          WHERE timestamp > NOW() - INTERVAL '1' DAY`,
+			),
+		);
+		return result;
+	});
+
+	const exit = await Runtime.Runtime.runtime.runPromiseExit(program);
+	return Exit.match(exit, {
+		onSuccess: (result) => result,
+		onFailure: (cause) => {
+			throw new Error(`Failed to requester\n${Cause.pretty(cause)}`);
+		},
+	});
+});
 
 export const Route = createFileRoute("/p/$questerHandle")({
 	component: QuesterProfile,
+	loader: () => getData(),
+	staleTime: 30_000,
 });
 
 // ─── Data shapes ────────────────────────────────────────────────────────────
@@ -279,6 +326,8 @@ const fmt = (n: number) =>
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 function QuesterProfile() {
+	const result = Route.useLoaderData();
+
 	const earned = BADGES.filter((b) => b.earned !== null);
 	const locked = BADGES.filter((b) => b.earned === null);
 
@@ -292,6 +341,11 @@ function QuesterProfile() {
 
 	return (
 		<div className="min-h-screen bg-background text-foreground flex flex-col">
+			<h1 className="text-2xl">
+				<pre>{JSON.stringify(result.result, null, 2)}</pre>
+			</h1>
+			<UnderConstruction.UnderConstruction />
+
 			{/* Header */}
 			<header className="bg-foreground text-background flex items-center justify-between px-8 py-4 border-b border-foreground">
 				<Link

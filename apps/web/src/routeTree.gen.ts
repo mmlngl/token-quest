@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as GuideRouteImport } from './routes/guide'
+import { Route as DevelopRouteImport } from './routes/develop'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
 import { Route as PQuesterHandleRouteImport } from './routes/p/$questerHandle'
@@ -20,6 +21,11 @@ import { Route as BBadgeSlugRouteImport } from './routes/b/$badgeSlug'
 const GuideRoute = GuideRouteImport.update({
   id: '/guide',
   path: '/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevelopRoute = DevelopRouteImport.update({
+  id: '/develop',
+  path: '/develop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,6 +61,7 @@ const BBadgeSlugRoute = BBadgeSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
@@ -74,6 +82,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/develop'
     | '/guide'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/develop'
     | '/guide'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/develop'
     | '/guide'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DevelopRoute: typeof DevelopRoute
   GuideRoute: typeof GuideRoute
   BBadgeSlugRoute: typeof BBadgeSlugRoute
   LeaderboardsDailyRoute: typeof LeaderboardsDailyRoute
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/guide'
       fullPath: '/guide'
       preLoaderRoute: typeof GuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/develop': {
+      id: '/develop'
+      path: '/develop'
+      fullPath: '/develop'
+      preLoaderRoute: typeof DevelopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,6 +197,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DevelopRoute: DevelopRoute,
   GuideRoute: GuideRoute,
   BBadgeSlugRoute: BBadgeSlugRoute,
   LeaderboardsDailyRoute: LeaderboardsDailyRoute,

@@ -11,6 +11,7 @@
   "name": "token-quest-api",
   "upload_source_maps": true,
   "vars": {
+    "ANALYTICS_DB": "prod",
     "ANALYTICS_GRAPHQL_ENDPOINT": "https://api.cloudflare.com/client/v4/graphql"
   },
   "observability": {

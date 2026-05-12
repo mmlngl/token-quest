@@ -8,10 +8,5 @@ export class SessionStatsApi extends P.HttpApiGroup.make("session-stats")
       success: Contract.ReportSuccessSchema,
       error: Contract.ReportErrors,
     }),
-    P.HttpApiEndpoint.post("sql", "/sql", {
-      payload: Contract.QuerySqlPayloadSchema,
-      success: Contract.QuerySqlSuccessSchema,
-      error: Contract.QuerySqlErrors,
-    }),
   )
   .prefix("/session-stats") {}
