@@ -6,6 +6,7 @@ import {
 	ChartTooltipContent,
 } from "@token-quest/ui/components/chart";
 import { Line, LineChart, XAxis, YAxis } from "recharts";
+import * as Masthead from "~widgets/masthead";
 
 export const Route = createFileRoute("/leaderboards/weekly")({
 	component: WeeklyLeaderboard,
@@ -110,28 +111,7 @@ function WeeklyLeaderboard() {
 	return (
 		<div className="min-h-screen bg-background text-foreground flex flex-col">
 			{/* Header */}
-			<header className="bg-foreground text-background flex items-center justify-between px-8 py-4 border-b border-foreground">
-				<div className="flex items-center gap-8">
-					<Link
-						to="/"
-						className="font-mono text-xs tracking-widest uppercase opacity-60 hover:opacity-100"
-					>
-						← Token Quest
-					</Link>
-					<span className="font-black text-sm tracking-widest uppercase">
-						Weekly Leaderboard
-					</span>
-				</div>
-				<div className="flex items-center gap-8">
-					<Link
-						to="/leaderboards/daily"
-						className="font-mono text-xs tracking-widest uppercase opacity-60 hover:opacity-100"
-					>
-						← Daily
-					</Link>
-					<span className="font-mono text-xs opacity-40">Week 19 · 2026</span>
-				</div>
-			</header>
+			<Masthead.Masthead pageTitle="Weekly Leaderboard" />
 
 			{/* Podium — top 3 */}
 			<div className="grid grid-cols-1 md:grid-cols-3 border-b border-foreground">
