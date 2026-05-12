@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@token-quest/ui/components/button";
+import { T } from "@token-quest/ui/components/typography";
 
 export const Route = createFileRoute("/_public/leaderboards/daily")({
 	component: RouteComponent,
@@ -16,9 +18,16 @@ function RouteComponent() {
 	const data = Route.useLoaderData();
 	return (
 		<div>
-			<Link to="/leaderboards/daily">Daily</Link>
-			<Link to="/leaderboards/weekly">Weekly</Link>
-			<h1>Daily</h1>
+			<div className="flex gap-2">
+				<Button asChild>
+					<Link to="/leaderboards/daily">Daily</Link>
+				</Button>
+				<Button asChild variant="secondary">
+					<Link to="/leaderboards/weekly">Weekly</Link>
+				</Button>
+			</div>
+
+			<T.H1>Daily</T.H1>
 			<pre>{JSON.stringify(data, null, 2)}</pre>
 		</div>
 	);
