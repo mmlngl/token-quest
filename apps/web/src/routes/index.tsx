@@ -8,7 +8,7 @@ function PublicHome() {
 			{/* Header strip */}
 			<header className="bg-foreground text-background flex items-center justify-between px-8 py-4 border-b border-foreground">
 				<span className="font-black text-sm tracking-widest uppercase">
-					Token Quest
+					Play Token Quest · Free
 				</span>
 				<span className="font-mono text-xs tracking-widest uppercase">
 					AI Usage · Ranked
@@ -78,9 +78,9 @@ function PublicHome() {
 			<footer className="grid grid-cols-1 md:grid-cols-2">
 				<Link
 					to="/leaderboards/daily"
-					className="p-8 border-r border-foreground flex items-center justify-between hover:bg-primary transition-colors"
+					className="p-8 group border-r border-foreground flex items-center justify-between hover:bg-primary transition-colors"
 				>
-					<span className="font-black text-lg uppercase tracking-tight">
+					<span className="font-black text-lg uppercase group-hover:underline tracking-tight">
 						View Leaderboard
 					</span>
 					<span className="font-mono">→</span>
@@ -88,9 +88,9 @@ function PublicHome() {
 				<Link
 					to="/sign-in/$"
 					params={{ _splat: "" }}
-					className="p-8 flex items-center justify-between hover:bg-primary transition-colors border-t md:border-t-0 border-foreground"
+					className="p-8 group flex items-center justify-between hover:bg-primary transition-colors border-t md:border-t-0 border-foreground"
 				>
-					<span className="font-black text-lg uppercase tracking-tight">
+					<span className="font-black text-lg uppercase group-hover:underline tracking-tight">
 						Join Now
 					</span>
 					<span className="font-mono">→</span>

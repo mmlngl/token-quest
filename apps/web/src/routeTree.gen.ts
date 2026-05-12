@@ -9,14 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PublicRouteRouteImport } from './routes/_public/route'
+import { Route as GuideRouteImport } from './routes/guide'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
-import { Route as PublicLeaderboardsWeeklyRouteImport } from './routes/_public/leaderboards.weekly'
-import { Route as PublicLeaderboardsDailyRouteImport } from './routes/_public/leaderboards.daily'
+import { Route as LeaderboardsWeeklyRouteImport } from './routes/leaderboards.weekly'
+import { Route as LeaderboardsDailyRouteImport } from './routes/leaderboards.daily'
 
-const PublicRouteRoute = PublicRouteRouteImport.update({
-  id: '/_public',
+const GuideRoute = GuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -29,65 +30,78 @@ const SignInSplatRoute = SignInSplatRouteImport.update({
   path: '/sign-in/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PublicLeaderboardsWeeklyRoute =
-  PublicLeaderboardsWeeklyRouteImport.update({
-    id: '/leaderboards/weekly',
-    path: '/leaderboards/weekly',
-    getParentRoute: () => PublicRouteRoute,
-  } as any)
-const PublicLeaderboardsDailyRoute = PublicLeaderboardsDailyRouteImport.update({
+const LeaderboardsWeeklyRoute = LeaderboardsWeeklyRouteImport.update({
+  id: '/leaderboards/weekly',
+  path: '/leaderboards/weekly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardsDailyRoute = LeaderboardsDailyRouteImport.update({
   id: '/leaderboards/daily',
   path: '/leaderboards/daily',
-  getParentRoute: () => PublicRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/guide': typeof GuideRoute
+  '/leaderboards/daily': typeof LeaderboardsDailyRoute
+  '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
   '/sign-in/$': typeof SignInSplatRoute
-  '/leaderboards/daily': typeof PublicLeaderboardsDailyRoute
-  '/leaderboards/weekly': typeof PublicLeaderboardsWeeklyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/guide': typeof GuideRoute
+  '/leaderboards/daily': typeof LeaderboardsDailyRoute
+  '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
   '/sign-in/$': typeof SignInSplatRoute
-  '/leaderboards/daily': typeof PublicLeaderboardsDailyRoute
-  '/leaderboards/weekly': typeof PublicLeaderboardsWeeklyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_public': typeof PublicRouteRouteWithChildren
+  '/guide': typeof GuideRoute
+  '/leaderboards/daily': typeof LeaderboardsDailyRoute
+  '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
   '/sign-in/$': typeof SignInSplatRoute
-  '/_public/leaderboards/daily': typeof PublicLeaderboardsDailyRoute
-  '/_public/leaderboards/weekly': typeof PublicLeaderboardsWeeklyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-in/$' | '/leaderboards/daily' | '/leaderboards/weekly'
+  fullPaths:
+    | '/'
+    | '/guide'
+    | '/leaderboards/daily'
+    | '/leaderboards/weekly'
+    | '/sign-in/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-in/$' | '/leaderboards/daily' | '/leaderboards/weekly'
+  to:
+    | '/'
+    | '/guide'
+    | '/leaderboards/daily'
+    | '/leaderboards/weekly'
+    | '/sign-in/$'
   id:
     | '__root__'
     | '/'
-    | '/_public'
+    | '/guide'
+    | '/leaderboards/daily'
+    | '/leaderboards/weekly'
     | '/sign-in/$'
-    | '/_public/leaderboards/daily'
-    | '/_public/leaderboards/weekly'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PublicRouteRoute: typeof PublicRouteRouteWithChildren
+  GuideRoute: typeof GuideRoute
+  LeaderboardsDailyRoute: typeof LeaderboardsDailyRoute
+  LeaderboardsWeeklyRoute: typeof LeaderboardsWeeklyRoute
   SignInSplatRoute: typeof SignInSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_public': {
-      id: '/_public'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof PublicRouteRouteImport
+    '/guide': {
+      id: '/guide'
+      path: '/guide'
+      fullPath: '/guide'
+      preLoaderRoute: typeof GuideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -104,40 +118,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignInSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_public/leaderboards/weekly': {
-      id: '/_public/leaderboards/weekly'
+    '/leaderboards/weekly': {
+      id: '/leaderboards/weekly'
       path: '/leaderboards/weekly'
       fullPath: '/leaderboards/weekly'
-      preLoaderRoute: typeof PublicLeaderboardsWeeklyRouteImport
-      parentRoute: typeof PublicRouteRoute
+      preLoaderRoute: typeof LeaderboardsWeeklyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_public/leaderboards/daily': {
-      id: '/_public/leaderboards/daily'
+    '/leaderboards/daily': {
+      id: '/leaderboards/daily'
       path: '/leaderboards/daily'
       fullPath: '/leaderboards/daily'
-      preLoaderRoute: typeof PublicLeaderboardsDailyRouteImport
-      parentRoute: typeof PublicRouteRoute
+      preLoaderRoute: typeof LeaderboardsDailyRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface PublicRouteRouteChildren {
-  PublicLeaderboardsDailyRoute: typeof PublicLeaderboardsDailyRoute
-  PublicLeaderboardsWeeklyRoute: typeof PublicLeaderboardsWeeklyRoute
-}
-
-const PublicRouteRouteChildren: PublicRouteRouteChildren = {
-  PublicLeaderboardsDailyRoute: PublicLeaderboardsDailyRoute,
-  PublicLeaderboardsWeeklyRoute: PublicLeaderboardsWeeklyRoute,
-}
-
-const PublicRouteRouteWithChildren = PublicRouteRoute._addFileChildren(
-  PublicRouteRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PublicRouteRoute: PublicRouteRouteWithChildren,
+  GuideRoute: GuideRoute,
+  LeaderboardsDailyRoute: LeaderboardsDailyRoute,
+  LeaderboardsWeeklyRoute: LeaderboardsWeeklyRoute,
   SignInSplatRoute: SignInSplatRoute,
 }
 export const routeTree = rootRouteImport
