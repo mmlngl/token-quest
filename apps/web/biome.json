@@ -3,7 +3,7 @@
 	"root": false,
 	"extends": [
 		"@token-quest/biome-config/base",
-		"@token-quest/biome-config/cf-worker"
+		"@token-quest/biome-config/react-internal"
 	],
 	"vcs": {
 		"enabled": false,

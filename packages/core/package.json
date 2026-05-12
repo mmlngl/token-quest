@@ -1,27 +1,29 @@
 {
-  "name": "@token-quest/core",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "exports": {
-    "./domain": "./src/domain/index.ts"
-  },
-  "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "keywords": [],
-  "author": "Michele Memoli <michele.memoli@gmail.com>",
-  "license": "MIT",
-  "packageManager": "pnpm@10.15.0",
-  "peerDependencies": {
-    "@effect/platform-node": "4.0.0-beta.65",
-    "effect": "4.0.0-beta.65"
-  },
-  "devDependencies": {
-    "@effect/platform-node": "4.0.0-beta.65",
-    "@effect/vitest": "4.0.0-beta.65",
-    "effect": "4.0.0-beta.65",
-    "vitest": "^4.1.5"
-  }
+	"name": "@token-quest/core",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"exports": {
+		"./domain": "./src/domain/index.ts"
+	},
+	"scripts": {
+		"lint": "biome check --write .",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"keywords": [],
+	"author": "Michele Memoli <michele.memoli@gmail.com>",
+	"license": "MIT",
+	"packageManager": "pnpm@10.15.0",
+	"peerDependencies": {
+		"@effect/platform-node": "4.0.0-beta.65",
+		"effect": "4.0.0-beta.65"
+	},
+	"devDependencies": {
+		"@effect/platform-node": "4.0.0-beta.65",
+		"@effect/vitest": "4.0.0-beta.65",
+		"@token-quest/biome-config": "workspace:^",
+		"effect": "4.0.0-beta.65",
+		"vitest": "^4.1.5"
+	}
 }
