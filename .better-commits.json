@@ -80,6 +80,10 @@
         "label": "package-core"
       },
       {
+        "value": "package-ui",
+        "label": "package-ui"
+      },
+      {
         "value": "",
         "label": "none"
       }
