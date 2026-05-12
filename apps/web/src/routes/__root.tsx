@@ -6,6 +6,7 @@ import ClerkProvider from "../integrations/clerk/provider";
 
 import appCss from "../styles.css?url";
 import "@fontsource-variable/space-grotesk";
+import "@fontsource/space-mono";
 
 export const Route = createRootRoute({
 	head: () => ({

@@ -96,9 +96,6 @@ importers:
       '@fontsource-variable/space-grotesk':
         specifier: ^5.2.10
         version: 5.2.10
-      '@fontsource/space-grotesk':
-        specifier: ^5.2.10
-        version: 5.2.10
       '@fontsource/space-mono':
         specifier: ^5.2.9
         version: 5.2.9
@@ -1011,9 +1008,6 @@ packages:
 
   '@fontsource-variable/space-grotesk@5.2.10':
     resolution: {integrity: sha512-yJQO/o35/hAP3CFnpdFTwQku2yzJOae2HIpBmqkOVoxhhXJaQP3g+b6Jrz7u+eI7A5ZdCIf88uMWpBJdFiGr5w==}
-
-  '@fontsource/space-grotesk@5.2.10':
-    resolution: {integrity: sha512-XNXEbT74OIITPqw2H6HXwPDp85fy43uxfBwFR5PU+9sLnjuLj12KlhVM9nZVN6q6dlKjkuN8JisW/OBxwxgUew==}
 
   '@fontsource/space-mono@5.2.9':
     resolution: {integrity: sha512-b61faFOHEISQ/pD25G+cfGY9o/WW6lRv6hBQQfpWvEJ4y1V+S4gmth95EVyBE2VL3qDYHeVQ8nBzrplzdXTDDg==}
@@ -4538,8 +4532,6 @@ snapshots:
   '@floating-ui/utils@0.2.11': {}
 
   '@fontsource-variable/space-grotesk@5.2.10': {}
-
-  '@fontsource/space-grotesk@5.2.10': {}
 
   '@fontsource/space-mono@5.2.9': {}
 
