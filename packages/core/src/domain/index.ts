@@ -1,3 +1,4 @@
+export * as Badges from "./badges";
 export * as LLMs from "./llms";
 export * as SessionStats from "./session-stats";
 export * as SessionStatsQueryEngine from "./session-stats-query-engine";

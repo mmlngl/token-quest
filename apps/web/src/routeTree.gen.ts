@@ -12,8 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as GuideRouteImport } from './routes/guide'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
+import { Route as PQuesterHandleRouteImport } from './routes/p/$questerHandle'
 import { Route as LeaderboardsWeeklyRouteImport } from './routes/leaderboards.weekly'
 import { Route as LeaderboardsDailyRouteImport } from './routes/leaderboards.daily'
+import { Route as BBadgeSlugRouteImport } from './routes/b/$badgeSlug'
 
 const GuideRoute = GuideRouteImport.update({
   id: '/guide',
@@ -30,6 +32,11 @@ const SignInSplatRoute = SignInSplatRouteImport.update({
   path: '/sign-in/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PQuesterHandleRoute = PQuesterHandleRouteImport.update({
+  id: '/p/$questerHandle',
+  path: '/p/$questerHandle',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeaderboardsWeeklyRoute = LeaderboardsWeeklyRouteImport.update({
   id: '/leaderboards/weekly',
   path: '/leaderboards/weekly',
@@ -40,27 +47,38 @@ const LeaderboardsDailyRoute = LeaderboardsDailyRouteImport.update({
   path: '/leaderboards/daily',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BBadgeSlugRoute = BBadgeSlugRouteImport.update({
+  id: '/b/$badgeSlug',
+  path: '/b/$badgeSlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/guide': typeof GuideRoute
+  '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
+  '/p/$questerHandle': typeof PQuesterHandleRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/guide': typeof GuideRoute
+  '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
+  '/p/$questerHandle': typeof PQuesterHandleRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/guide': typeof GuideRoute
+  '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
+  '/p/$questerHandle': typeof PQuesterHandleRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRouteTypes {
@@ -68,30 +86,38 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/guide'
+    | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
+    | '/p/$questerHandle'
     | '/sign-in/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/guide'
+    | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
+    | '/p/$questerHandle'
     | '/sign-in/$'
   id:
     | '__root__'
     | '/'
     | '/guide'
+    | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
+    | '/p/$questerHandle'
     | '/sign-in/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GuideRoute: typeof GuideRoute
+  BBadgeSlugRoute: typeof BBadgeSlugRoute
   LeaderboardsDailyRoute: typeof LeaderboardsDailyRoute
   LeaderboardsWeeklyRoute: typeof LeaderboardsWeeklyRoute
+  PQuesterHandleRoute: typeof PQuesterHandleRoute
   SignInSplatRoute: typeof SignInSplatRoute
 }
 
@@ -118,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignInSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/p/$questerHandle': {
+      id: '/p/$questerHandle'
+      path: '/p/$questerHandle'
+      fullPath: '/p/$questerHandle'
+      preLoaderRoute: typeof PQuesterHandleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leaderboards/weekly': {
       id: '/leaderboards/weekly'
       path: '/leaderboards/weekly'
@@ -132,14 +165,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeaderboardsDailyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/b/$badgeSlug': {
+      id: '/b/$badgeSlug'
+      path: '/b/$badgeSlug'
+      fullPath: '/b/$badgeSlug'
+      preLoaderRoute: typeof BBadgeSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GuideRoute: GuideRoute,
+  BBadgeSlugRoute: BBadgeSlugRoute,
   LeaderboardsDailyRoute: LeaderboardsDailyRoute,
   LeaderboardsWeeklyRoute: LeaderboardsWeeklyRoute,
+  PQuesterHandleRoute: PQuesterHandleRoute,
   SignInSplatRoute: SignInSplatRoute,
 }
 export const routeTree = rootRouteImport

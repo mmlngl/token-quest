@@ -6,7 +6,10 @@
 		"module": "ESNext",
 		"paths": {
 			"~lib/*": ["./src/lib/*"],
-			"~services/*": ["./src/lib/services/*"]
+			"~services/*": ["./src/lib/services/*"],
+			"~entities/*": ["./src/lib/entities/*"],
+			"~features/*": ["./src/lib/features/*"],
+			"~widgets/*": ["./src/lib/widgets/*"]
 		},
 		"lib": ["ES2022", "DOM", "DOM.Iterable"],
 		"types": ["vite/client"],
