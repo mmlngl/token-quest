@@ -4,10 +4,13 @@
 	"author": "Michele Memoli <michele.memoli@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
+		"@better-auth/drizzle-adapter": "^1.6.11",
 		"@effect/platform-node": "4.0.0-beta.65",
 		"@effect/vitest": "4.0.0-beta.65",
 		"@token-quest/api": "workspace:^",
 		"@token-quest/core": "workspace:^",
+		"better-auth": "^1.6.11",
+		"drizzle-orm": "^0.45.2",
 		"effect": "4.0.0-beta.65",
 		"wrangler": "^4.90.0"
 	},
@@ -15,6 +18,7 @@
 		"@token-quest/biome-config": "workspace:^",
 		"@token-quest/typescript-config": "workspace:^",
 		"@types/node": "^25.6.0",
+		"drizzle-kit": "^0.31.10",
 		"typescript": "5.9.3"
 	},
 	"private": true,
@@ -23,6 +27,9 @@
 		"lint": "biome check --write .",
 		"check": "tsc && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
-		"dev": "wrangler dev"
+		"dev": "wrangler dev",
+		"db:generate:auth": "pnpm dlx auth@latest generate --config=./src/infra/auth/auth-sync.ts --output=./src/infra/db/schema/auth.ts --yes",
+		"db:generate": "pnpm run db:generate:auth && pnpm drizzle-kit generate",
+		"db:migrate": "wrangler d1 migrations apply DB"
 	}
 }

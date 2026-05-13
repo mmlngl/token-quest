@@ -4,6 +4,7 @@ import * as Cause from "effect/Cause";
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";
 import * as Http from "./Http";
+import * as Auth from "./infra/auth/auth-client";
 
 export default class ApiWorker extends WorkerEntrypoint {
 	async fetch(request: Request) {
@@ -33,5 +34,9 @@ export default class ApiWorker extends WorkerEntrypoint {
 			},
 			onSuccess: (v) => v,
 		});
+	}
+
+	async getAuth() {
+		return Auth.authClient;
 	}
 }

@@ -1,36 +1,45 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "compatibility_date": "2025-10-08",
-  "compatibility_flags": [
-    "nodejs_compat",
-    "enable_request_signal",
-    "request_signal_passthrough",
-    "no_handle_cross_request_promise_resolution"
-  ],
-  "main": "src/main.ts",
-  "name": "token-quest-api",
-  "upload_source_maps": true,
-  "vars": {
-    "ANALYTICS_DB": "prod",
-    "ANALYTICS_GRAPHQL_ENDPOINT": "https://api.cloudflare.com/client/v4/graphql"
-  },
-  "observability": {
-    "logs": {
-      "enabled": true,
-      "invocation_logs": true
-    },
-    "traces": {
-      "enabled": true
-    }
-  },
-  "analytics_engine_datasets": [
-    {
-      "binding": "ANALYTICS_PROD",
-      "dataset": "token_quest_session_stats_prod"
-    },
-    {
-      "binding": "ANALYTICS_DEV",
-      "dataset": "token_quest_session_stats_dev"
-    }
-  ]
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"compatibility_date": "2025-10-08",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"enable_request_signal",
+		"request_signal_passthrough",
+		"no_handle_cross_request_promise_resolution"
+	],
+	"main": "src/main.ts",
+	"name": "token-quest-api",
+	"upload_source_maps": true,
+	"vars": {
+		"ANALYTICS_DB": "prod",
+		"ANALYTICS_GRAPHQL_ENDPOINT": "https://api.cloudflare.com/client/v4/graphql",
+
+	},
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"invocation_logs": true
+		},
+		"traces": {
+			"enabled": true
+		}
+	},
+	"analytics_engine_datasets": [
+		{
+			"binding": "ANALYTICS_PROD",
+			"dataset": "token_quest_session_stats_prod"
+		},
+		{
+			"binding": "ANALYTICS_DEV",
+			"dataset": "token_quest_session_stats_dev"
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "token-quest-prod",
+			"database_id": "5e69dd0b-86f4-4893-b745-03938b96dbe7",
+			"migrations_dir": "src/infra/db/migrations"
+		}
+	]
 }
