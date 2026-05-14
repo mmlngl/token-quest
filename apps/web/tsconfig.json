@@ -1,9 +1,5 @@
 {
-	"include": [
-		"**/*.ts",
-		"**/*.tsx",
-		"src/lib/services/runtime/runtime.serverts"
-	],
+	"include": ["**/*.ts", "**/*.tsx"],
 	"compilerOptions": {
 		"target": "ES2022",
 		"jsx": "react-jsx",

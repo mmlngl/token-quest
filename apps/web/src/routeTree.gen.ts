@@ -11,12 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as GuideRouteImport } from './routes/guide'
 import { Route as DevelopRouteImport } from './routes/develop'
+import { Route as PrivateRouteRouteImport } from './routes/_private/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
 import { Route as PQuesterHandleRouteImport } from './routes/p/$questerHandle'
 import { Route as LeaderboardsWeeklyRouteImport } from './routes/leaderboards.weekly'
 import { Route as LeaderboardsDailyRouteImport } from './routes/leaderboards.daily'
 import { Route as BBadgeSlugRouteImport } from './routes/b/$badgeSlug'
+import { Route as PrivateDashboardRouteImport } from './routes/_private/dashboard'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const GuideRoute = GuideRouteImport.update({
   id: '/guide',
@@ -26,6 +29,10 @@ const GuideRoute = GuideRouteImport.update({
 const DevelopRoute = DevelopRouteImport.update({
   id: '/develop',
   path: '/develop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivateRouteRoute = PrivateRouteRouteImport.update({
+  id: '/_private',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -58,37 +65,54 @@ const BBadgeSlugRoute = BBadgeSlugRouteImport.update({
   path: '/b/$badgeSlug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivateDashboardRoute = PrivateDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => PrivateRouteRoute,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
+  '/dashboard': typeof PrivateDashboardRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
   '/p/$questerHandle': typeof PQuesterHandleRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
+  '/dashboard': typeof PrivateDashboardRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
   '/p/$questerHandle': typeof PQuesterHandleRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_private': typeof PrivateRouteRouteWithChildren
   '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
+  '/_private/dashboard': typeof PrivateDashboardRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
   '/p/$questerHandle': typeof PQuesterHandleRoute
   '/sign-in/$': typeof SignInSplatRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -96,35 +120,43 @@ export interface FileRouteTypes {
     | '/'
     | '/develop'
     | '/guide'
+    | '/dashboard'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
     | '/p/$questerHandle'
     | '/sign-in/$'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/develop'
     | '/guide'
+    | '/dashboard'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
     | '/p/$questerHandle'
     | '/sign-in/$'
+    | '/api/auth/$'
   id:
     | '__root__'
     | '/'
+    | '/_private'
     | '/develop'
     | '/guide'
+    | '/_private/dashboard'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
     | '/p/$questerHandle'
     | '/sign-in/$'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PrivateRouteRoute: typeof PrivateRouteRouteWithChildren
   DevelopRoute: typeof DevelopRoute
   GuideRoute: typeof GuideRoute
   BBadgeSlugRoute: typeof BBadgeSlugRoute
@@ -132,6 +164,7 @@ export interface RootRouteChildren {
   LeaderboardsWeeklyRoute: typeof LeaderboardsWeeklyRoute
   PQuesterHandleRoute: typeof PQuesterHandleRoute
   SignInSplatRoute: typeof SignInSplatRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -148,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/develop'
       fullPath: '/develop'
       preLoaderRoute: typeof DevelopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_private': {
+      id: '/_private'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PrivateRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -192,11 +232,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BBadgeSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_private/dashboard': {
+      id: '/_private/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof PrivateDashboardRouteImport
+      parentRoute: typeof PrivateRouteRoute
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface PrivateRouteRouteChildren {
+  PrivateDashboardRoute: typeof PrivateDashboardRoute
+}
+
+const PrivateRouteRouteChildren: PrivateRouteRouteChildren = {
+  PrivateDashboardRoute: PrivateDashboardRoute,
+}
+
+const PrivateRouteRouteWithChildren = PrivateRouteRoute._addFileChildren(
+  PrivateRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PrivateRouteRoute: PrivateRouteRouteWithChildren,
   DevelopRoute: DevelopRoute,
   GuideRoute: GuideRoute,
   BBadgeSlugRoute: BBadgeSlugRoute,
@@ -204,6 +271,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeaderboardsWeeklyRoute: LeaderboardsWeeklyRoute,
   PQuesterHandleRoute: PQuesterHandleRoute,
   SignInSplatRoute: SignInSplatRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

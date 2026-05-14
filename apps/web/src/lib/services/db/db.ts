@@ -2,7 +2,7 @@ import { drizzle } from "drizzle-orm/d1";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
-import * as WorkerEnv from "../worker-env";
+import * as WorkerEnv from "../worker-env.server";
 import * as schema from "./schema";
 
 const make = (envs: Env) => {

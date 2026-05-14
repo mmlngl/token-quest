@@ -1,0 +1,5 @@
+$kind: http-request
+name: Ok
+url: "{{baseUrl}}/auth/ok"
+method: GET
+order: 1778752540533

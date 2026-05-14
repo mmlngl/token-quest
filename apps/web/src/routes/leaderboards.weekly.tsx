@@ -11,7 +11,7 @@ import * as Cause from "effect/Cause";
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";
 import { Line, LineChart, XAxis, YAxis } from "recharts";
-import * as Runtime from "~services/runtime";
+import { Runtime } from "~lib/services";
 import * as Masthead from "~widgets/masthead";
 import * as UnderConstruction from "~widgets/under-constructions";
 
@@ -27,7 +27,7 @@ export const getData = createServerFn().handler(async () => {
 		return yield* Effect.void;
 	});
 
-	const exit = await Runtime.Runtime.runtime.runPromiseExit(program);
+	const exit = await Runtime.runtime.runPromiseExit(program);
 	return Exit.match(exit, {
 		onSuccess: () => void 0,
 		onFailure: (cause) => {

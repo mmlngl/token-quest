@@ -6,8 +6,8 @@ import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";
 import * as Option from "effect/Option";
 import type * as BadgeEntity from "~entities/badge";
+import { ReadonlyBadgeRepo, Runtime } from "~lib/services";
 import { BadgeWidget } from "~lib/widgets/badge";
-import * as Runtime from "~services/runtime";
 import * as UnderConstruction from "~widgets/under-constructions";
 
 export interface BadgeLoaderData {
@@ -25,11 +25,11 @@ export const getData = createServerFn()
 		);
 
 		const program = Effect.gen(function* () {
-			const Repo = yield* Runtime.ReadonlyBadgeRepo.ReadonlyBadgeRepo;
+			const Repo = yield* ReadonlyBadgeRepo.ReadonlyBadgeRepo;
 			return yield* Repo.getForSlug(badgeSlug);
 		});
 
-		const exit = await Runtime.Runtime.runtime.runPromiseExit(program);
+		const exit = await Runtime.runtime.runPromiseExit(program);
 		return Exit.match(exit, {
 			onSuccess: (badgeOpt) =>
 				Option.match(badgeOpt, {

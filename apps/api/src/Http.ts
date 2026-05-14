@@ -21,20 +21,26 @@ export const makeHandler = (env: Env, ctx: ExecutionContext) => {
 	).pipe(Layer.provide(CfLayer));
 
 	const ApiLayer = Layer.mergeAll(
-		Health.HttpHealthLive.pipe(Layer.provide(InfraLayer)),
-		SessionStats.HttpSessionStatsLive.pipe(Layer.provide(InfraLayer)),
-	);
+		Health.HttpHealthLive,
+		SessionStats.HttpSessionStatsLive,
+	).pipe(Layer.provide(InfraLayer));
 
 	const FinalLayer = Layer.provide(
 		P.HttpApiBuilder.layer(Api.Api),
 		Layer.mergeAll(Http.HttpServer.layerServices, ApiLayer),
 	);
 
+	const trustedOrigins =
+		env.TRUSTED_ORIGINS?.split(",").map((o) => o.trim()) ?? [];
+
 	return {
 		handler: Http.HttpRouter.toWebHandler(FinalLayer, {
 			middleware: Fn.flow(
 				Http.HttpMiddleware.logger,
-				Http.HttpMiddleware.cors(),
+				Http.HttpMiddleware.cors({
+					allowedOrigins: (origin) => trustedOrigins.includes(origin),
+					credentials: true,
+				}),
 			),
 		}),
 		runtime: ManagedRuntime.make(InfraLayer),

@@ -4,7 +4,7 @@ import { setResponseHeaders } from "@tanstack/react-start/server";
 import * as Cause from "effect/Cause";
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";
-import * as Runtime from "~services/runtime";
+import { Api, Runtime } from "~lib/services";
 import * as UnderConstruction from "~widgets/under-constructions";
 
 export const getData = createServerFn({
@@ -17,9 +17,9 @@ export const getData = createServerFn({
 		}),
 	);
 	const program = Effect.gen(function* () {
-		const Api = yield* Runtime.Api.Api;
-		const result = yield* Api.use((api) =>
-			api.sql(
+		const api = yield* Api.Api;
+		const result = yield* api.use((client) =>
+			client.sql(
 				`SELECT blob1 AS session_id,
                 index1 AS user_id,
                 blob2 AS provider,
@@ -36,7 +36,7 @@ export const getData = createServerFn({
 		return result;
 	});
 
-	const exit = await Runtime.Runtime.runtime.runPromiseExit(program);
+	const exit = await Runtime.runtime.runPromiseExit(program);
 	return Exit.match(exit, {
 		onSuccess: (result) => result,
 		onFailure: (cause) => {
