@@ -7,7 +7,7 @@ export const SignInButton: FC<ComponentProps<"button">> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const handleClick = useCallback(async () => {
 		setIsLoading(true);
-		await authClient().signIn.social({
+		await authClient.signIn.social({
 			provider: "github",
 			callbackURL: "/dashboard",
 		});

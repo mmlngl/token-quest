@@ -52,7 +52,6 @@ function PublicHome() {
 					<span className="font-mono text-xs opacity-40">Sun 10 May 2026</span>
 				</div>
 			</header>
-
 			{/* Main grid */}
 			<main className="flex-1 grid grid-cols-1 md:grid-cols-12 border-b border-foreground">
 				{/* Left — headline */}
@@ -111,7 +110,6 @@ function PublicHome() {
 					))}
 				</div>
 			</main>
-
 			{/* Footer nav */}
 			<footer className="grid grid-cols-1 md:grid-cols-2">
 				<Link

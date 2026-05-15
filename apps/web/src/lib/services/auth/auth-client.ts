@@ -1,9 +1,6 @@
 import { apiKeyClient } from "@better-auth/api-key/client";
-import { createClientOnlyFn } from "@tanstack/react-start";
-import { createAuthClient } from "better-auth/client";
+import { createAuthClient } from "better-auth/react";
 
-export const authClient = createClientOnlyFn(() =>
-	createAuthClient({
-		plugins: [apiKeyClient()],
-	}),
-);
+export const authClient = createAuthClient({
+	plugins: [apiKeyClient()],
+});

@@ -43,6 +43,9 @@ export class AuthConfig extends Context.Service<
 					github: {
 						clientId: Redacted.value(vars.githubClientId),
 						clientSecret: Redacted.value(vars.githubClientSecret),
+						mapProfileToUser: (profile) => ({
+							name: profile.login,
+						}),
 					},
 				},
 			};

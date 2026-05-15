@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { setResponseHeaders } from "@tanstack/react-start/server";
+// import { setResponseHeaders } from "@tanstack/react-start/server";
 import * as Cause from "effect/Cause";
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";
@@ -17,12 +17,12 @@ export interface BadgeLoaderData {
 export const getData = createServerFn()
 	.inputValidator((data: { badgeSlug: string }) => data)
 	.handler(async ({ data: { badgeSlug } }) => {
-		setResponseHeaders(
-			new Headers({
-				"Cache-Control": "public, max-age=300",
-				"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
-			}),
-		);
+		// setResponseHeaders(
+		// 	new Headers({
+		// 		"Cache-Control": "public, max-age=300",
+		// 		"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
+		// 	}),
+		// );
 
 		const program = Effect.gen(function* () {
 			const Repo = yield* ReadonlyBadgeRepo.ReadonlyBadgeRepo;
@@ -46,7 +46,7 @@ export const getData = createServerFn()
 
 export const Route = createFileRoute("/b/$badgeSlug")({
 	component: BadgeDetail,
-	loader: ({ params: { badgeSlug } }) => getData({ data: { badgeSlug } }),
+	loader: async ({ params: { badgeSlug } }) => getData({ data: { badgeSlug } }),
 	staleTime: 30_000,
 });
 

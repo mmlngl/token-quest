@@ -9,7 +9,6 @@ function DevelopPage() {
 	return (
 		<div className="min-h-screen bg-background text-foreground flex flex-col">
 			<Masthead.Masthead pageTitle="Develop" />
-
 			{/* Footer CTA */}
 			<footer className="grid grid-cols-1 md:grid-cols-2">
 				<Link

@@ -21,7 +21,7 @@
 	"dependencies": {
 		"@better-auth/api-key": "^1.6.11",
 		"@better-auth/drizzle-adapter": "^1.6.11",
-		"@cloudflare/vite-plugin": "^1.26.0",
+		"@cloudflare/vite-plugin": "^1.37.0",
 		"@fontsource-variable/space-grotesk": "^5.2.10",
 		"@fontsource/space-mono": "^5.2.9",
 		"@tailwindcss/vite": "^4.1.18",
@@ -57,7 +57,7 @@
 		"typescript": "^6.0.2",
 		"vite": "^8.0.0",
 		"vitest": "^4.1.5",
-		"wrangler": "^4.70.0"
+		"wrangler": "^4.91.0"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [

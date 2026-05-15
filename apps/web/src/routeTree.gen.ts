@@ -18,6 +18,7 @@ import { Route as PQuesterHandleRouteImport } from './routes/p/$questerHandle'
 import { Route as LeaderboardsWeeklyRouteImport } from './routes/leaderboards.weekly'
 import { Route as LeaderboardsDailyRouteImport } from './routes/leaderboards.daily'
 import { Route as BBadgeSlugRouteImport } from './routes/b/$badgeSlug'
+import { Route as PrivateSettingsRouteImport } from './routes/_private/settings'
 import { Route as PrivateDashboardRouteImport } from './routes/_private/dashboard'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
@@ -65,6 +66,11 @@ const BBadgeSlugRoute = BBadgeSlugRouteImport.update({
   path: '/b/$badgeSlug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivateSettingsRoute = PrivateSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => PrivateRouteRoute,
+} as any)
 const PrivateDashboardRoute = PrivateDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
   '/dashboard': typeof PrivateDashboardRoute
+  '/settings': typeof PrivateSettingsRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
   '/dashboard': typeof PrivateDashboardRoute
+  '/settings': typeof PrivateSettingsRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/develop': typeof DevelopRoute
   '/guide': typeof GuideRoute
   '/_private/dashboard': typeof PrivateDashboardRoute
+  '/_private/settings': typeof PrivateSettingsRoute
   '/b/$badgeSlug': typeof BBadgeSlugRoute
   '/leaderboards/daily': typeof LeaderboardsDailyRoute
   '/leaderboards/weekly': typeof LeaderboardsWeeklyRoute
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/develop'
     | '/guide'
     | '/dashboard'
+    | '/settings'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/develop'
     | '/guide'
     | '/dashboard'
+    | '/settings'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/develop'
     | '/guide'
     | '/_private/dashboard'
+    | '/_private/settings'
     | '/b/$badgeSlug'
     | '/leaderboards/daily'
     | '/leaderboards/weekly'
@@ -232,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BBadgeSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_private/settings': {
+      id: '/_private/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof PrivateSettingsRouteImport
+      parentRoute: typeof PrivateRouteRoute
+    }
     '/_private/dashboard': {
       id: '/_private/dashboard'
       path: '/dashboard'
@@ -251,10 +270,12 @@ declare module '@tanstack/react-router' {
 
 interface PrivateRouteRouteChildren {
   PrivateDashboardRoute: typeof PrivateDashboardRoute
+  PrivateSettingsRoute: typeof PrivateSettingsRoute
 }
 
 const PrivateRouteRouteChildren: PrivateRouteRouteChildren = {
   PrivateDashboardRoute: PrivateDashboardRoute,
+  PrivateSettingsRoute: PrivateSettingsRoute,
 }
 
 const PrivateRouteRouteWithChildren = PrivateRouteRoute._addFileChildren(

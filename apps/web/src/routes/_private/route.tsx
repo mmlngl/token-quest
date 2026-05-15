@@ -9,6 +9,7 @@ export const Route = createFileRoute("/_private")({
 		if (!session) throw redirect({ to: "/sign-in/$" });
 		return { user: session.user };
 	},
+	loader: ({ context }) => ({ user: context.user }),
 });
 
 function PrivateLayout() {

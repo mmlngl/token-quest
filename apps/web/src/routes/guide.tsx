@@ -11,7 +11,6 @@ function GuidePage() {
 		<div className="min-h-screen bg-background text-foreground flex flex-col">
 			<UnderConstruction.UnderConstruction />
 			<Masthead.Masthead pageTitle="How to Play" />
-
 			{/* Hero */}
 			<section className="grid grid-cols-1 md:grid-cols-12 border-b border-foreground">
 				{/* Left — headline */}
@@ -75,7 +74,6 @@ function GuidePage() {
 					))}
 				</div>
 			</section>
-
 			{/* Scoring */}
 			<section className="grid grid-cols-1 md:grid-cols-12 border-b border-foreground">
 				<div className="md:col-span-4 bg-foreground text-background p-8 md:p-12 flex flex-col justify-between border-b md:border-b-0 md:border-r border-foreground">
@@ -113,7 +111,6 @@ function GuidePage() {
 					))}
 				</div>
 			</section>
-
 			{/* Badges */}
 			<section className="border-b border-foreground">
 				<div className="grid grid-cols-1 md:grid-cols-12">
@@ -176,7 +173,6 @@ function GuidePage() {
 					))}
 				</div>
 			</section>
-
 			{/* Reporting */}
 			<section className="grid grid-cols-1 md:grid-cols-12 border-b border-foreground">
 				<div className="md:col-span-5 p-8 md:p-12 flex flex-col justify-between border-b md:border-b-0 md:border-r border-foreground">
@@ -240,7 +236,6 @@ function GuidePage() {
 					))}
 				</div>
 			</section>
-
 			{/* Footer CTA */}
 			<footer className="grid grid-cols-1 md:grid-cols-2">
 				<Link

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { setResponseHeaders } from "@tanstack/react-start/server";
+// import { setResponseHeaders } from "@tanstack/react-start/server";
 import * as Cause from "effect/Cause";
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";
@@ -10,12 +10,12 @@ import * as UnderConstruction from "~widgets/under-constructions";
 export const getData = createServerFn({
 	strict: false,
 }).handler(async () => {
-	setResponseHeaders(
-		new Headers({
-			"Cache-Control": "public, max-age=300",
-			"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
-		}),
-	);
+	// setResponseHeaders(
+	// 	new Headers({
+	// 		"Cache-Control": "public, max-age=300",
+	// 		"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
+	// 	}),
+	// );
 	const program = Effect.gen(function* () {
 		const api = yield* Api.Api;
 		const result = yield* api.use((client) =>
@@ -47,7 +47,7 @@ export const getData = createServerFn({
 
 export const Route = createFileRoute("/p/$questerHandle")({
 	component: QuesterProfile,
-	loader: () => getData(),
+	loader: async () => getData(),
 	staleTime: 30_000,
 });
 

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { setResponseHeaders } from "@tanstack/react-start/server";
+// import { createServerFn } from "@tanstack/react-start";
+// import { setResponseHeaders } from "@tanstack/react-start/server";
 import {
 	type ChartConfig,
 	ChartContainer,
@@ -16,17 +17,15 @@ import * as Masthead from "~widgets/masthead";
 import * as UnderConstruction from "~widgets/under-constructions";
 
 export const getData = createServerFn().handler(async () => {
-	setResponseHeaders(
-		new Headers({
-			"Cache-Control": "public, max-age=300",
-			"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
-		}),
-	);
-
+	// setResponseHeaders(
+	// 	new Headers({
+	// 		"Cache-Control": "public, max-age=300",
+	// 		"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
+	// 	}),
+	// );
 	const program = Effect.gen(function* () {
 		return yield* Effect.void;
 	});
-
 	const exit = await Runtime.runtime.runPromiseExit(program);
 	return Exit.match(exit, {
 		onSuccess: () => void 0,
@@ -38,7 +37,7 @@ export const getData = createServerFn().handler(async () => {
 
 export const Route = createFileRoute("/leaderboards/daily")({
 	component: DailyLeaderboard,
-	loader: () => getData(),
+	loader: async () => getData(),
 	staleTime: 30_000,
 });
 
@@ -91,7 +90,6 @@ function DailyLeaderboard() {
 			<UnderConstruction.UnderConstruction />
 			{/* Header */}
 			<Masthead.Masthead pageTitle="Daily Leaderboard" />
-
 			{/* Podium — top 3 */}
 			<div className="grid grid-cols-1 md:grid-cols-3 border-b border-foreground">
 				{/* 1st — green */}
@@ -179,7 +177,6 @@ function DailyLeaderboard() {
 					</div>
 				</div>
 			</div>
-
 			{/* Chart + Stats */}
 			<div className="grid grid-cols-1 md:grid-cols-12 border-b border-foreground">
 				{/* Chart */}
@@ -254,7 +251,6 @@ function DailyLeaderboard() {
 					))}
 				</div>
 			</div>
-
 			{/* Ranks 4–10 */}
 			<div className="flex-1">
 				{REST.map((p, i) => (
@@ -278,7 +274,6 @@ function DailyLeaderboard() {
 					</div>
 				))}
 			</div>
-
 			{/* Footer CTA */}
 			<div className="grid grid-cols-2 border-t border-foreground">
 				<div className="p-8 border-r border-foreground flex items-center justify-between hover:bg-primary transition-colors cursor-pointer">

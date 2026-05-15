@@ -1,10 +1,13 @@
-import { Input } from "@token-quest/ui/components/input";
 import type { ComponentProps, FC } from "react";
+import type { ApiTokenModel } from "~lib/entities/api-token";
 
-export const ApiTokenDisplay: FC<ComponentProps<"div">> = (props) => {
-	return (
-		<div {...props}>
-			<Input>sdlkjasdio9dkdsf</Input>
-		</div>
-	);
+export type ApiTokenDisplayProps = ComponentProps<"div"> & {
+	token: ApiTokenModel;
+};
+
+export const ApiTokenDisplay: FC<ApiTokenDisplayProps> = ({
+	token,
+	...props
+}) => {
+	return <div {...props}>{token}</div>;
 };

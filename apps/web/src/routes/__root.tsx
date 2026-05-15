@@ -3,8 +3,6 @@ import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import appCss from "../styles.css?url";
-import "@fontsource-variable/space-grotesk";
-import "@fontsource/space-mono";
 
 export const Route = createRootRoute({
 	head: () => ({

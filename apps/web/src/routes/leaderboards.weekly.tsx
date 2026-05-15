@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { setResponseHeaders } from "@tanstack/react-start/server";
 import {
 	type ChartConfig,
 	ChartContainer,
@@ -16,12 +15,12 @@ import * as Masthead from "~widgets/masthead";
 import * as UnderConstruction from "~widgets/under-constructions";
 
 export const getData = createServerFn().handler(async () => {
-	setResponseHeaders(
-		new Headers({
-			"Cache-Control": "public, max-age=300",
-			"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
-		}),
-	);
+	// setResponseHeaders(
+	// 	new Headers({
+	// 		"Cache-Control": "public, max-age=300",
+	// 		"CDN-Cache-Control": "max-age=3600, stale-while-revalidate=600",
+	// 	}),
+	// );
 
 	const program = Effect.gen(function* () {
 		return yield* Effect.void;
@@ -38,7 +37,7 @@ export const getData = createServerFn().handler(async () => {
 
 export const Route = createFileRoute("/leaderboards/weekly")({
 	component: WeeklyLeaderboard,
-	loader: () => getData(),
+	loader: async () => getData(),
 	staleTime: 30_000,
 });
 
